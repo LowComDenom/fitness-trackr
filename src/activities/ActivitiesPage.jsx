@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getActivities } from "../api/activities";
+import { getActivities, deleteActivity } from "../api/activities";
 
 import ActivityList from "./ActivityList";
 import ActivityForm from "./ActivityForm";
@@ -11,7 +11,7 @@ export default function ActivitiesPage() {
     const data = await getActivities();
     setActivities(data);
   };
-
+  
   useEffect(() => {
     syncActivities();
   }, []);
@@ -19,7 +19,7 @@ export default function ActivitiesPage() {
   return (
     <>
       <h1>Activities</h1>
-      <ActivityList activities={activities} />
+      <ActivityList activities={activities} deleteActivity={deleteActivity} syncActivities={syncActivities} />
       <ActivityForm syncActivities={syncActivities} />
     </>
   );
